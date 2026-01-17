@@ -11,6 +11,7 @@ Built with **Flutter & Firebase** and integrated with **Google Maps Platform**, 
 
 
 ---
+
 ## 🎓 Academic Information
 
 - **Student Developer:** Noor Mustafa  
