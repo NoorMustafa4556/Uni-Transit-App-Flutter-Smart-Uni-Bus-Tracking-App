@@ -7,6 +7,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool showLogo;
   final List<Widget>? actions;
   final bool centerTitle;
+  final bool showBackArrow;
 
   const CustomAppBar({
     super.key,
@@ -14,15 +15,24 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.showLogo = false,
     this.actions,
     this.centerTitle = true,
+    this.showBackArrow = true,
   });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
+    final canPop = Navigator.of(context).canPop();
 
     return AppBar(
       centerTitle: centerTitle,
+      // Show back arrow if: explicitly enabled AND there's a route to pop to
+      leading: (showBackArrow && canPop)
+          ? IconButton(
+              icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 20),
+              onPressed: () => Navigator.pop(context),
+            )
+          : null,
       backgroundColor: isDark ? const Color(0xFF0F172A) : Colors.white,
       foregroundColor: isDark ? Colors.white : AppColors.primaryNavy,
       surfaceTintColor: Colors.transparent,
@@ -53,4 +63,3 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
-

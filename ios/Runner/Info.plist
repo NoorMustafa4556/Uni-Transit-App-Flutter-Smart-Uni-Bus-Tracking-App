@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Uni Transit</string>
+	<string>UniTransit</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -31,29 +31,65 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+
+	<!-- 🔒 SECURITY: App Transport Security (ATS) Configuration -->
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<false/>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<!-- OSRM Routing API -->
+			<key>router.project-osrm.org</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
+			<!-- OpenStreetMap Tiles -->
+			<key>tile.openstreetmap.org</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
+		</dict>
+	</dict>
+
+	<!-- 🔒 PRIVACY: Better permission strings for App Store approval -->
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>UniTransit requires location access to track buses and show your position on the map.</string>
+	<string>UniTransit uses your location to show your real-time position on the campus map and help you find the nearest bus stops.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>UniTransit requires background location access for live bus tracking and notifications.</string>
+	<string>UniTransit requires background location for drivers to broadcast their bus position and for students to receive proximity alerts when their bus is near.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>UniTransit requires background location access to provide accurate bus arrival times.</string>
+	<string>UniTransit requires background location to ensure the bus tracking remains accurate even when your phone screen is off or the app is minimized.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>UniTransit needs camera access so you can take and upload a profile picture for student verification.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>UniTransit needs photo library access so you can select and upload your profile picture from your gallery.</string>
+
+	<!-- 🔋 BATTERY: Background Modes for persistent tracking -->
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>
+		<string>fetch</string>
+		<string>remote-notification</string>
 	</array>
+
+	<!-- 🧠 PERFORMANCE: Optimize rendering -->
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>

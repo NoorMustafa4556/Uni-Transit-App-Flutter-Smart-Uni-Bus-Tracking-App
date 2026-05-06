@@ -7,7 +7,6 @@ import 'package:uni_transit/core/constants/app_colors.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:uni_transit/l10n/app_localizations.dart';
 import '../../view_models/auth_provider.dart';
 import '../../core/routes/app_routes.dart';
 
@@ -106,7 +105,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       ),
                     ),
                     Text(
-                      AppLocalizations.of(context)!.loginTitle,
+                      "Welcome Back",
                       textAlign: TextAlign.center,
                       style: GoogleFonts.poppins(
                         fontSize: 32,
@@ -115,7 +114,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       ),
                     ),
                     Text(
-                      AppLocalizations.of(context)!.loginSubtitle,
+                      "Login to your account",
                       textAlign: TextAlign.center,
                       style: GoogleFonts.poppins(
                         fontSize: 14,
@@ -126,7 +125,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
                     _buildTextField(
                       controller: _emailController,
-                      label: AppLocalizations.of(context)!.emailLabel,
+                      label: "Email Address",
                       icon: Icons.email_outlined,
                       keyboardType: TextInputType.emailAddress,
                     ),
@@ -135,7 +134,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     // Password Field
                     _buildTextField(
                       controller: _passwordController,
-                      label: AppLocalizations.of(context)!.passwordLabel,
+                      label: "Password",
                       icon: Icons.lock_outline,
                       isPassword: true,
                       obscureText: _obscurePassword,
@@ -155,7 +154,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           );
                         },
                         child: Text(
-                          AppLocalizations.of(context)!.forgotPasswordLink,
+                          "Forgot Password?",
                           style: const TextStyle(
                             color: AppColors.primaryYellow,
                             fontWeight: FontWeight.w500,
@@ -185,9 +184,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                   strokeWidth: 2.5,
                                 ),
                               )
-                            : Text(
-                                AppLocalizations.of(context)!.loginButton,
-                                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                            : const Text(
+                                "LOGIN",
+                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                               ),
                       ),
                     ),

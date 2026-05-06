@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uni_transit/core/constants/app_assets.dart';
 import 'package:uni_transit/core/constants/app_colors.dart';
-import 'package:uni_transit/l10n/app_localizations.dart';
 import '../../view_models/auth_provider.dart';
 
 class ForgotPasswordScreen extends ConsumerStatefulWidget {
@@ -98,7 +97,7 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
                     ),
                     const SizedBox(height: 24),
                     Text(
-                      AppLocalizations.of(context)!.forgotPasswordTitle,
+                      "Forgot Password",
                       textAlign: TextAlign.center,
                       style: GoogleFonts.poppins(
                         fontSize: 32,
@@ -108,7 +107,7 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      AppLocalizations.of(context)!.forgotPasswordSubtitle,
+                      "Enter your email to reset password",
                       textAlign: TextAlign.center,
                       style: GoogleFonts.poppins(
                         fontSize: 14,
@@ -119,7 +118,7 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
 
                     _buildTextField(
                       controller: _emailController,
-                      label: AppLocalizations.of(context)!.emailLabel,
+                      label: "Email Address",
                       icon: Icons.email_outlined,
                       keyboardType: TextInputType.emailAddress,
                     ),
@@ -143,9 +142,9 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
                                 ? const CircularProgressIndicator(
                                   color: AppColors.primaryNavy,
                                 )
-                                : Text(
-                                  AppLocalizations.of(context)!.resetButton,
-                                  style: const TextStyle(
+                                : const Text(
+                                  "RESET",
+                                  style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),

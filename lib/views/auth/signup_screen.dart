@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:uni_transit/core/constants/app_colors.dart';
 import 'package:uni_transit/core/constants/app_assets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:uni_transit/l10n/app_localizations.dart';
 import '../../view_models/auth_provider.dart';
 
 class SignUpScreen extends ConsumerStatefulWidget {
@@ -115,7 +114,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                     ),
                     const SizedBox(height: 24),
                     Text(
-                      AppLocalizations.of(context)!.joinTitle,
+                      "Join UniTransit",
                       textAlign: TextAlign.center,
                       style: GoogleFonts.poppins(
                         fontSize: 28,
@@ -127,20 +126,20 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                     
                     _buildTextField(
                       controller: _nameController,
-                      label: AppLocalizations.of(context)!.fullNameLabel,
+                      label: "Full Name",
                       icon: Icons.person_outline,
                     ),
                     const SizedBox(height: 16),
                     _buildTextField(
                       controller: _emailController,
-                      label: AppLocalizations.of(context)!.universityEmail,
+                      label: "University Email",
                       icon: Icons.email_outlined,
                       keyboardType: TextInputType.emailAddress,
                     ),
                     const SizedBox(height: 16),
                     _buildTextField(
                       controller: _passwordController,
-                      label: AppLocalizations.of(context)!.passwordLabel,
+                      label: "Password",
                       icon: Icons.lock_outline,
                       isPassword: true,
                       obscureText: _obscurePassword,
@@ -166,9 +165,9 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                                   strokeWidth: 2.5,
                                 ),
                               )
-                            : Text(
-                                AppLocalizations.of(context)!.signUpButton,
-                                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                            : const Text(
+                                "SIGN UP",
+                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                               ),
                       ),
                     ),

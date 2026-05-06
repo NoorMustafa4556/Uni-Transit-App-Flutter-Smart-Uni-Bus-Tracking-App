@@ -47,8 +47,8 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   }
 
   void _checkLoginStatus() async {
-    // Total wait time 3.5 seconds
-    await Future.delayed(const Duration(milliseconds: 3500));
+    // ⚡ SPEED OPT: Reduced from 3.5s to 2s — animation completes at 1.5s so 2s is enough
+    await Future.delayed(const Duration(milliseconds: 2000));
 
     final prefs = await SharedPreferences.getInstance();
     final bool onboardingCompleted = prefs.getBool('onboarding_completed') ?? false;
@@ -81,6 +81,8 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
           routeName = '/student_dashboard';
         } else if (role == 'Driver') {
           routeName = '/driver_dashboard';
+        } else if (role == 'Admin') {
+          routeName = '/admin_dashboard';
         }
         Navigator.pushReplacementNamed(context, routeName);
       }

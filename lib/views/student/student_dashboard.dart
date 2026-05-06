@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:uni_transit/core/constants/app_colors.dart';
-import 'package:uni_transit/widgets/app_drawer.dart';
+import 'package:uni_transit/widgets/student_drawer.dart';
 import 'package:uni_transit/widgets/custom_app_bar.dart';
-import 'package:uni_transit/l10n/app_localizations.dart';
 import 'map_screen.dart';
 import 'schedule_screen.dart';
 
@@ -26,21 +25,24 @@ class StudentDashboard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final currentIndex = ref.watch(studentNavIndexProvider);
     final theme = Theme.of(context);
-    final l10n = AppLocalizations.of(context)!;
     
-    final screens = const [
-      MapScreen(),
-      ScheduleScreen(),
-    ];
-
+    // ⚡ SPEED OPT: Use IndexedStack to keep both screens alive in memory.
+    // Prevents expensive map re-initialization when switching tabs.
     return Scaffold(
       extendBody: true,
       appBar: CustomAppBar(
-        title: currentIndex == 0 ? l10n.studentDashboard : l10n.schedule,
+        title: currentIndex == 0 ? "STUDENT DASHBOARD" : "SCHEDULE",
         showLogo: false,
+        showBackArrow: false,
       ),
-      drawer: const AppDrawer(),
-      body: screens[currentIndex],
+      drawer: const StudentDrawer(),
+      body: IndexedStack(
+        index: currentIndex,
+        children: const [
+          MapScreen(),
+          ScheduleScreen(),
+        ],
+      ),
       bottomNavigationBar: Container(
         padding: const EdgeInsets.only(bottom: 24, left: 24, right: 24),
         child: Container(
@@ -67,7 +69,7 @@ class StudentDashboard extends ConsumerWidget {
                 index: 0,
                 icon: Icons.map_rounded,
                 activeIcon: Icons.map_rounded,
-                label: l10n.liveTrackingActive,
+                label: "LIVE TRACKING",
                 isActive: currentIndex == 0,
                 onTap: () => ref.read(studentNavIndexProvider.notifier).setIndex(0),
               ),
@@ -76,7 +78,7 @@ class StudentDashboard extends ConsumerWidget {
                 index: 1,
                 icon: Icons.calendar_today_rounded,
                 activeIcon: Icons.calendar_month_rounded,
-                label: l10n.schedule,
+                label: "SCHEDULE",
                 isActive: currentIndex == 1,
                 onTap: () => ref.read(studentNavIndexProvider.notifier).setIndex(1),
               ),

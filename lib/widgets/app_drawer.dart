@@ -44,13 +44,15 @@ class _AppDrawerState extends ConsumerState<AppDrawer> {
   }
 
   void _navigateTopLevel(String routeName) {
-    Navigator.pop(context);
     final currentRoute = ModalRoute.of(context)?.settings.name;
     if (currentRoute != routeName) {
-      // Use pushReplacement so that the stack doesn't grow indefinitely
-      Navigator.pushReplacementNamed(context, routeName);
+      Navigator.pop(context); // Close drawer for smooth back navigation
+      Navigator.pushNamed(context, routeName);
+    } else {
+      Navigator.pop(context); // Just close if already there
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -73,10 +75,9 @@ class _AppDrawerState extends ConsumerState<AppDrawer> {
           const SizedBox(height: 20),
           _buildSectionTitle("ACCOUNT"),
           _DrawerTile(icon: Icons.person_outline_rounded, title: "My Profile", onTap: () => _navigateTopLevel('/profile')),
-          _DrawerTile(icon: Icons.settings_outlined, title: "Settings", onTap: () => _navigateTopLevel('/settings')),
           const SizedBox(height: 20),
           _buildSectionTitle("SUPPORT & INFO"),
-          _DrawerTile(icon: Icons.help_outline_rounded, title: "Help & Support", onTap: () => _navigateTopLevel('/support')),
+          _DrawerTile(icon: Icons.help_outline_rounded, title: "Support", onTap: () => _navigateTopLevel('/support')),
           _DrawerTile(icon: Icons.info_outline_rounded, title: "About App", onTap: () => _navigateTopLevel('/about')),
         ])),
         _buildFooter(),
@@ -95,6 +96,12 @@ class _AppDrawerState extends ConsumerState<AppDrawer> {
       return [
         _DrawerTile(icon: Icons.dashboard_rounded, title: "Driver Dashboard", onTap: () { Navigator.pop(context); Navigator.pushNamedAndRemoveUntil(context, '/driver_dashboard', (r) => false); }),
         _DrawerTile(icon: Icons.history_rounded, title: "My Trip History", onTap: () { Navigator.pop(context); Navigator.push(context, MaterialPageRoute(builder: (context) => const TripHistoryScreen())); }),
+      ];
+    } else if (role == 'Admin') {
+      return [
+        _DrawerTile(icon: Icons.admin_panel_settings_rounded, title: "Admin Panel", onTap: () { Navigator.pop(context); Navigator.pushNamedAndRemoveUntil(context, '/admin_dashboard', (r) => false); }),
+        _DrawerTile(icon: Icons.add_circle_outline_rounded, title: "Add Schedule", onTap: () { Navigator.pop(context); Navigator.pushNamed(context, '/add_schedule'); }),
+        _DrawerTile(icon: Icons.track_changes_rounded, title: "Live Overview", onTap: () { Navigator.pop(context); Navigator.pushNamed(context, '/tracking'); }),
       ];
     }
     return [];
