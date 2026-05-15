@@ -2,11 +2,20 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <!-- Background location might be needed depending on requirements, usually restricted in newer Android versions -->
+    <!-- 🔋 BATTERY: Background location for driver tracking continuity -->
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
+    <!-- 🔋 BATTERY: Prevent system from killing foreground GPS -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <!-- 🔋 BATTERY: Wake lock for stable GPS tracking -->
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+
     <application
-        android:label="uni_transit"
+        android:label="UniTransit"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:allowBackup="false"
+        android:fullBackupContent="false">
         <activity
             android:name=".MainActivity"
             android:exported="true"
